@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Selamat Ulang Tahun!</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #87ceeb;
+      color: white;
+      text-align: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 50px 20px;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+      animation: fadeInDown 1.5s ease-out;
+    }
+
+    h2 {
+      font-size: 1.5em;
+      margin: 20px 0;
+      max-width: 90%;
+      animation: fadeInUp 2s ease-in;
+    }
+
+    img {
+      width: 300px;
+      max-width: 80%;
+      border-radius: 12px;
+      margin-top: 25px;
+      box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s;
+    }
+
+    img:hover {
+      transform: scale(1.03);
+    }
+
+    .btn, .btn-aesthetic {
+      margin-top: 20px;
+      padding: 12px 28px;
+      font-size: 1em;
+      border: none;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      letter-spacing: 1px;
+    }
+
+    .btn:hover,
+    .btn-aesthetic:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, #00e6d8, #005aff);
+    }
+
+    .cake {
+      font-size: 80px;
+      position: relative;
+      margin-top: 40px;
+      animation: bounce 2s infinite;
+      cursor: pointer;
+    }
+
+    .flame {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 30px;
+      animation: flicker 1s infinite;
+    }
+
+    .smoke {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 30px;
+      opacity: 0.8;
+      animation: rise 2s ease-out forwards;
+    }
+
+    #cakeMessage {
+      font-size: 1.1em;
+      margin-top: 15px;
+      font-style: italic;
+      animation: fadeInUp 1s ease;
+    }
+
+    .balloon {
+      position: fixed;
+      bottom: -100px;
+      animation: floatUp linear infinite;
+      opacity: 0.9;
+    }
+
+    .firework {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: gold;
+      border-radius: 50%;
+      animation: explode 1s ease-out forwards;
+    }
+
+    .confetti {
+      position: fixed;
+      top: 0;
+      width: 10px;
+      height: 10px;
+      opacity: 0.8;
+      animation: fallConfetti linear forwards;
+      z-index: 9999;
+    }
+
+    /* Animations */
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    @keyframes rise {
+      0% { transform: translateX(-50%) translateY(0); opacity: 0.8; }
+      100% { transform: translateX(-50%) translateY(-60px); opacity: 0; }
+    }
+
+    @keyframes floatUp {
+      to { transform: translateY(-120vh); opacity: 0; }
+    }
+
+    @keyframes explode {
+      to { transform: scale(20); opacity: 0; }
+    }
+
+    @keyframes fallConfetti {
+      to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <button class="btn" onclick="startCelebration()">Mulai Perayaan</button>
+    <h1> Happy Birthday, Candra! </h1>
+    <img src="img/candraa.jpeg" alt="Foto ulang tahun">
+    <h2>Semoga hidup kamu setinggi gunung dan kebahagiaanmu seluas langit 🌄</h2>
+
+    <div class="cake" onclick="blowCandle()">
+      🎂
+      <div id="flame" class="flame">🔥</div>
+    </div>
+
+    <p id="cakeMessage"></p>
+
+    <button class="btn-aesthetic" onclick="location.href='page2.html'">Lanjut ➜</button>
+  </div>
+
+  <iframe id="bgMusic" width="0" height="0" style="display:none;" frameborder="no" allow="autoplay"></iframe>
+
+  <script>
+    function startCelebration() {
+      const bgMusic = document.getElementById('bgMusic');
+      bgMusic.src = "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/user442216899/jamrud-selamat-ulang-tahun&auto_play=true";
+
+      setInterval(createBalloon, 700);
+      setInterval(createFirework, 2000);
+      setInterval(createConfetti, 400);
+    }
+
+    function createBalloon() {
+      const balloon = document.createElement('div');
+      balloon.className = 'balloon';
+      balloon.textContent = '🎈';
+      balloon.style.left = Math.random() * 100 + 'vw';
+      balloon.style.fontSize = (20 + Math.random() * 30) + 'px';
+      balloon.style.animationDuration = 6 + Math.random() * 4 + 's';
+      document.body.appendChild(balloon);
+      setTimeout(() => balloon.remove(), 10000);
+    }
+
+    function createFirework() {
+      for (let i = 0; i < 10; i++) {
+        const fw = document.createElement('div');
+        fw.className = 'firework';
+        fw.style.top = Math.random() * 80 + 'vh';
+        fw.style.left = Math.random() * 100 + 'vw';
+        document.body.appendChild(fw);
+        setTimeout(() => fw.remove(), 1000);
+      }
+    }
+
+    function createConfetti() {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.backgroundColor = ['red','yellow','blue','green','orange'][Math.floor(Math.random() * 5)];
+      confetti.style.animationDuration = 3 + Math.random() * 2 + 's';
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 5000);
+    }
+
+    function blowCandle() {
+      const flame = document.getElementById('flame');
+      if (flame) flame.remove();
+
+      const smoke = document.createElement('div');
+      smoke.className = 'smoke';
+      smoke.textContent = '💨';
+      document.querySelector('.cake').appendChild(smoke);
+
+      document.getElementById('cakeMessage').textContent = 'Yeay! Sudah tiup lilin 🎉 Semoga semua harapan terkabul!';
+    }
+  </script>
+</body>
+</html>
+
