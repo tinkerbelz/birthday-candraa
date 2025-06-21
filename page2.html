@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Galeri Ulang Tahun 🎉</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f8ff;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #0072ff;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      text-align: center;
+      max-width: 600px;
+    }
+
+    .slider-container {
+      position: relative;
+      width: 90%;
+      max-width: 600px;
+      height: 400px;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    .slider-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+      border-radius: 15px;
+    }
+
+    .slider-container img.active {
+      display: block;
+    }
+
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.4);
+      color: white;
+      border: none;
+      font-size: 2em;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .slider-btn:hover {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .prev-btn {
+      left: 10px;
+    }
+
+    .next-btn {
+      right: 10px;
+    }
+
+    .btn-back {
+      margin-top: 40px;
+      padding: 12px 30px;
+      font-size: 1em;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: bold;
+    }
+
+    .btn-back:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(135deg, #00e6d8, #005aff);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Happy Birthday Candraa</h1>
+  <p>I hope you are always healthy and happy, thank you for surviving this far, I am proud of you. In the next life there will definitely be more trials, I hope you are always strong and never give up, candra.
+
+May this year bring you lots of happiness, success and new adventures waiting to be explored.
+
+Happy traveling and happy birthday! 🌍✈️</p>
+
+  <div class="slider-container">
+    <button class="slider-btn prev-btn" onclick="prevSlide()">❮</button>
+    <img src="img/candra1.jpeg" alt="Foto 1" class="active">
+    <img src="img/candra2.jpeg" alt="Foto 2">
+    <img src="img/candra3.jpeg" alt="Foto 3">
+    <img src="img/candra4.jpeg" alt="Foto 4">
+    <img src="img/candra5.jpeg" alt="Foto 5">
+    <img src="img/candra6.jpeg" alt="Foto 6">
+    <img src="img/candra7.jpeg" alt="Foto 7">
+    <button class="slider-btn next-btn" onclick="nextSlide()">❯</button>
+  </div>
+
+  <button class="btn-back" onclick="location.href='ulangtahun.html'">← Kembali ke Halaman Utama</button>
+
+  <script>
+    const images = document.querySelectorAll('.slider-container img');
+    let current = 0;
+
+    function showSlide(index) {
+      images.forEach((img, i) => {
+        img.classList.toggle('active', i === index);
+      });
+    }
+
+    function nextSlide() {
+      current = (current + 1) % images.length;
+      showSlide(current);
+    }
+
+    function prevSlide() {
+      current = (current - 1 + images.length) % images.length;
+      showSlide(current);
+    }
+
+    // Auto slide
+    setInterval(nextSlide, 4000);
+  </script>
+
+</body>
+</html>
+
+
+
+
